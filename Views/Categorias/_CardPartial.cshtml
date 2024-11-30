@@ -1,0 +1,35 @@
+﻿@model frontendnet.Models.Producto
+
+<div class="card h-100">
+    <!-- Image handling with fallback -->
+    <img src='@((Model.ArchivoId == null) ? "https://placehold.co/300x200/FFF/999?text=Articulo" : $"{ViewBag.Url}/api/archivos/{Model.ArchivoId}")'
+         alt="@Model.Titulo" class="portada card-img-top" data-url="@ViewBag.Url" style="max-height: 200px;" />
+
+    <div class="card-body d-flex flex-column">
+        <p class="card-text">@Model.Titulo</p>
+
+        <!-- Display price with formatting -->
+        <h5 class="card-title">@Html.DisplayFor(model => model.Precio)</h5>
+
+        <p class="card-text">
+            <!-- Display categories dynamically with null check -->
+            @if (Model.Categorias != null && Model.Categorias.Any ()) {
+                @foreach (var cat in Model.Categorias) {
+                    <span class="badge rounded-pill text-bg-warning">@cat.Nombre</span>
+                }
+            } else {
+                <span class="badge rounded-pill text-bg-secondary">Sin categoría</span>
+            }
+        </p>
+
+        <!-- Offer text for free shipping -->
+        <p class="mt-auto card-text text-success fw-semibold small">
+            <i class="bi bi-lightning-fill"></i> Envío gratis
+        </p>
+    </div>
+
+    <!-- Footer with "Comprar" button, ensure it links to the correct action -->
+    <div class="card-footer">
+        <a class="btn btn-primary btn-sm" href="@Url.Action("AgregarAlCarrito", "Carrito", new { id = Model.ProductoId })" role="button">Comprar</a>
+    </div>
+</div>

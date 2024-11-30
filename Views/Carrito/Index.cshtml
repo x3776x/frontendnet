@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Carrito de compras";
+    ViewData["SubTitle"] = "Listado";
+}
+
+<h2 class="text-center mb-3">
+    @ViewData["Title"]
+    <small class="text-muted fs-5">@ViewData["SubTitle"]</small>
+</h2>
+
+<div class="row small mb-3">
+    <div class="col text-end">
+        <!-- Display the number of items dynamically -->
+        Mostrando @Model.Count () elementos
+    </div>
+</div>
+
+@if (Model.Count () == 0) {
+    <div class="mt-5">
+        <div class="alert alert-warning" role="alert">
+            No se han encontrado elementos. Intente más tarde.
+        </div>
+    </div>
+} else {
+    <!-- Your cart items would be displayed here -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered small">
+            <thead class="text-center">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>@item.Producto.Titulo</td>
+                        <td>@item.Cantidad</td>
+                        <td>@item.Producto.Precio</td>
+                        <td>@(item.Cantidad * item.Producto.Precio)</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

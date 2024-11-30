@@ -1,0 +1,34 @@
+/* Variables globales */
+:root {
+    --mercadolibre-bg-light: #ffe600;
+    --mercadolibre-bg-dark: var(--bs-body-bg);
+    --logo-light: url("../images/logo.png");
+    --logo-dark: url("../images/logo-dark.png");
+}
+
+/* Tema oscuro */
+html[data-bs-theme="dark"] body {
+    --mercadolibre-bg: var(--mercadolibre-bg-dark);
+    --logo: var(--logo-dark);
+}
+
+/* Tema claro */
+html[data-bs-theme="light"] body {
+    --mercadolibre-bg: var(--mercadolibre-bg-light);
+    --logo: var(--logo-light);
+}
+
+/* Clases */
+.bg-mercadolibre {
+    background-color: var(--mercadolibre-bg) !important;
+}
+
+.logo {
+    display: block;
+    box-sizing: border-box;
+    background-image: var(--logo);
+    background-repeat: no-repeat;
+    background-size: 100px 25px;
+    height: 25px;
+    width: 100px;
+}

@@ -1,0 +1,70 @@
+﻿@model frontendnet.Models.UsuarioPwd
+@{
+    ViewData["Title"] = "Usuarios";
+    ViewData["SubTitle"] = "Crear";
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item">
+            <a class="text-decoration-none" title="Regresar al listado" asp-action="Index">Listado</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            @ViewData["SubTitle"]
+        </li>
+    </ol>
+</nav>
+
+<h2 class="text-center mb-3">
+    @ViewData["Title"]
+    <small class="text-muted fs-5">@ViewData["SubTitle"]</small>
+</h2>
+
+<form asp-action="Crear">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card mt-3">
+        <div class="card-body small">
+            <!-- Email Field -->
+            <div class="form-floating mb-3">
+                <input asp-for="Email" class="form-control" id="email" placeholder="Correo electrónico" />
+                <label for="email" class="form-label">Correo electrónico</label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-floating mb-3">
+                <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Contraseña" />
+                <label for="password" class="form-label">Contraseña</label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Nombre Field -->
+            <div class="form-floating mb-3">
+                <input asp-for="Nombre" class="form-control" id="nombre" placeholder="Nombre completo" />
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <!-- Rol Selection -->
+            <div class="form-floating mb-3">
+                <select asp-for="Rol" class="form-select form-control" id="rol">
+                    <option value="">Seleccione un rol de usuario</option>
+                    @foreach (var rol in ViewBag.Rol as IEnumerable<SelectListItem>) {
+                        <option value="@rol.Value">@rol.Text</option>
+                    }
+                </select>
+                <label for="rol" class="form-label">Rol</label>
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <button id="btnEnviar" type="submit" class="btn btn-sm btn-primary">Guardar</button>
+        <a class="btn btn-sm btn-outline-secondary" asp-action="Index" title="Cancelar">Cancelar</a>
+    </div>
+</form>
